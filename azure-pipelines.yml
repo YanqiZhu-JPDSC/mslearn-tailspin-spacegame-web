@@ -10,23 +10,13 @@ variables:
   buildConfiguration: 'Release'
   wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
   dotnetSdkVersion: '6.x'
+  NODE_OPTIONS: --max_old_space_size=4096
 
 steps:
 - task: UseNode@1
   inputs:
     version: '22.7.0'
   displayName: 'Install Node.js'
-
-- script: |
-    node -e 'console.log(Math.floor(v8.getHeapStatistics().heap_size_limit/1024/1024))'
-  displayName: 'Run Node.js Command'
-
-- task: PowerShell@2
-  displayName: Increase memory
-  inputs:
-    targetType: 'inline'
-    script: |
-        $env:NODE_OPTIONS="--max-old-space-size=4096"
 
 - script: |
     node -e 'console.log(Math.floor(v8.getHeapStatistics().heap_size_limit/1024/1024))'
