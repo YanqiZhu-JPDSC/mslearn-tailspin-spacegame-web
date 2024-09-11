@@ -2,9 +2,7 @@ trigger:
 - '*'
 
 pool:
-  vmImage: 'ubuntu-20.04'
-  demands:
-  - npm
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -13,11 +11,9 @@ variables:
   NODE_OPTIONS: --max_old_space_size=8192
 
 steps:
-- task: UseNode@1
+- task: PowerShell@2
+  displayName: 'Build(UAT)'
   inputs:
-    version: '22.7.0'
-  displayName: 'Install Node.js'
-
-- script: |
-    node -e 'console.log(Math.floor(v8.getHeapStatistics().heap_size_limit/1024/1024))'
-  displayName: 'Run Node.js Command'
+    targetType:'inline'
+    script: |
+      .\devenv /?
