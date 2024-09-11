@@ -6,14 +6,13 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
-  dotnetSdkVersion: '6.x'
-  NODE_OPTIONS: --max_old_space_size=8192
+  buildPlatform: 'Any CPU'
 
 steps:
 - task: PowerShell@2
   displayName: 'Build(UAT)'
   inputs:
     targetType: 'inline'
-    scipt: |
+    script: |
+      cd "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE"
       ./devenv /?
